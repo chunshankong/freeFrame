@@ -2,7 +2,6 @@ package freeframe.test;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.function.Consumer;
 
 import freeframe.system.Scene;
 import freeframe.utils.MyArrayList;

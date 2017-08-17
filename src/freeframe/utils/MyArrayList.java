@@ -1,13 +1,7 @@
 package freeframe.utils;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.function.Consumer;
-
-import freeframe.test.Missile;
 
 public class MyArrayList<E> extends ArrayList<E> {
 
