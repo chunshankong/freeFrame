@@ -19,8 +19,6 @@ public class Animation {
 	private boolean start = false;
 	
 	private long lastTime = 0;
-	
-	private long elapsedTime = 0;//切换关键帧经过的时间
  
 	public void setPlayMode(PlayMode playMode) {
 		this.playMode = playMode;
@@ -39,22 +37,15 @@ public class Animation {
 			return keyFrames[0];
 		}else {
 			long systemTime = System.currentTimeMillis();
-			long deltaTime = systemTime - lastTime;
-			lastTime = systemTime;
-			elapsedTime += deltaTime;
-			
-			if (elapsedTime >= duration) {
-				elapsedTime = 0;
+			if ((systemTime - lastTime) >= duration) {
+				lastTime = systemTime;
 				index++;
 				if (index >= keyFrames.length) {
 					index = 0;
 				}
-				System.err.println("index++");
 			}
-			
 			return keyFrames[index];
 		}
-		
 	}
 	
 	

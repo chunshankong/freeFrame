@@ -14,16 +14,6 @@ import javax.swing.JPanel;
 
 public class ImageUtil {
 
-	static BufferedImage image;
-	static {
-		try {
-			image = ImageIO.read(new File("resource/image/xys8.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public static BufferedImage flipHorizontal(BufferedImage img) {
 		AffineTransform transform = new AffineTransform();
 		transform.scale(-1, 1);
@@ -31,7 +21,7 @@ public class ImageUtil {
 
 		AffineTransformOp affineTransformOp = new AffineTransformOp(transform,
 				null);
-		return affineTransformOp.filter(image, null);
+		return affineTransformOp.filter(img, null);
 	}
 
 	public static BufferedImage flipVertical(BufferedImage img) {
@@ -41,10 +31,12 @@ public class ImageUtil {
 
 		AffineTransformOp affineTransformOp = new AffineTransformOp(transform,
 				null);
-		return affineTransformOp.filter(image, null);
+		return affineTransformOp.filter(img, null);
 	}
-	static int j = 0;
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws IOException {
+		
+		final BufferedImage image = ImageIO.read(new File("resource/image/xys8.png"));
 		final JFrame frame = new JFrame();
 		final Animation animation = new Animation();
 		final BufferedImage[][] images = split(image, 8, 8);
@@ -60,6 +52,8 @@ public class ImageUtil {
 				Graphics2D g2d = (Graphics2D) g;
 
 				BufferedImage region = animation.getKeyFrame();
+				
+				region = flipHorizontal(region);
 				
 				g2d.drawImage(region, 10, 200, null);
 
