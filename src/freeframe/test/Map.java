@@ -5,53 +5,47 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import freeframe.system.AbstractGameObject;
+import freeframe.system.ContactListener;
 import freeframe.system.SceneFacade;
 import freeframe.utils.ResourceUtil;
 
-public class BgLable extends AbstractGameObject{
+public class Map extends AbstractGameObject implements ContactListener{
 
-	BufferedImage bg = null;
 	
-	public BgLable(int x, int y, int width, int height, SceneFacade sceneFacade) {
+	public Map(int x, int y, int width, int height, SceneFacade sceneFacade) {
 		super(x, y, width, height, sceneFacade);
 		// TODO Auto-generated constructor stub
-		bg = ResourceUtil.getImage("image/bg.jpg");
-		
+		bodyImg = ResourceUtil.getImage("image/blackhole.png");
 	}
+	BufferedImage bodyImg = null;
+ 
+	
+	
 	
 	@Override
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
-		g2d.drawImage(bg,x,y,width,height,null);
-		g2d.drawImage(bg,x,y-height,width,height,null);
-		
+		g2d.drawImage(bodyImg, x, y, null);
 	}
 
-	long renderAccumilatedTime = 0;// 上次渲染的时间
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		long starttime = System.nanoTime();
-		starttime = starttime / 1000000;// 当前毫秒
-		if (33 <= (starttime - renderAccumilatedTime)) {
-			renderAccumilatedTime = starttime;
-			this.y += 1;
-			if(this.y >= height)y = 0;
-		}
 		
 	}
 
 	@Override
-	public void destroy() {
+	public void beginContact(ContactListener target) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void endContact(ContactListener target) {
 		// TODO Auto-generated method stub
 		
 	}
-
-
 	@Override
 	public Rectangle getBody() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Rectangle(x, y, bodyImg.getWidth(), bodyImg.getHeight());
 	}
-
 }

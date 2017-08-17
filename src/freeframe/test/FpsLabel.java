@@ -3,8 +3,10 @@ package freeframe.test;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import freeframe.system.GameObject;
+import freeframe.system.SceneFacade;
 
 public class FpsLabel implements GameObject{
 
@@ -12,83 +14,6 @@ public class FpsLabel implements GameObject{
 	int fpsCount = 0;
 	long fpsTime = 0;
 	
-	@Override
-	public void keyDown(int keyCode) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyUp(int keyCode) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseLeftButtonDown(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseRightButtonDown(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMiddleButtonDown(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseLeftButtonUp(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseRightButtonUp(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMiddleButtonUp(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseHover(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseLeave(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseWheel() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMove(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseDragged(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void draw(Graphics2D g2d) {
@@ -120,7 +45,23 @@ public class FpsLabel implements GameObject{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
+
+	@Override
+	public Rectangle getBody() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSceneFacade(SceneFacade sceneFacade) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isLive() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

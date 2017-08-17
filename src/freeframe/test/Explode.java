@@ -1,109 +1,27 @@
 package freeframe.test;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import freeframe.system.FreeFrame;
+import freeframe.system.AbstractGameObject;
 import freeframe.system.GameObject;
-import freeframe.system.Log;
+import freeframe.system.SceneFacade;
 import freeframe.utils.ResourceUtil;
 
-public class Explode implements GameObject{
+public class Explode extends AbstractGameObject{
 	
-	int x;
-	int y;
-	BufferedImage [] buf = null;
-	
-	public Explode(int x,int y) {
+	public Explode(int x, int y, int width, int height, SceneFacade sceneFacade) {
+		super(x, y, width, height, sceneFacade);
 		// TODO Auto-generated constructor stub
-		this.x = x;
-		this.y = y;
-		
 		buf = new BufferedImage[11];
 		for(int i=0;i<buf.length;i++){
 			buf[i] = ResourceUtil.getImage("image/explode/"+i+".gif");
 		}
-		
 	}
-	
-	@Override
-	public void keyDown(int keyCode) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyUp(int keyCode) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseLeftButtonDown(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseRightButtonDown(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMiddleButtonDown(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseLeftButtonUp(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseRightButtonUp(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMiddleButtonUp(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseHover(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseLeave(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseWheel() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMove(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseDragged(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	int x;
+	int y;
+	BufferedImage [] buf = null;
 	
 	@Override
 	public void draw(Graphics2D g2d) {
@@ -133,7 +51,15 @@ public class Explode implements GameObject{
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
+		super.destroy();
+		this.buf = null;
+		 
+	}
+
+	@Override
+	public Rectangle getBody() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

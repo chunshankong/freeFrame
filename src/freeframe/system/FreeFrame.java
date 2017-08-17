@@ -2,8 +2,8 @@ package freeframe.system;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-
-import javax.swing.SwingUtilities;
+import java.awt.event.MouseWheelEvent;
+import java.util.ArrayList;
 
 public abstract class FreeFrame implements WindowsAPP, GameAPP, EventListener {
 
@@ -15,8 +15,12 @@ public abstract class FreeFrame implements WindowsAPP, GameAPP, EventListener {
 	private static final int updateTimerId = 1;
 	private static final int updateInterval = 10;// 毫秒/帧
 
+	private ArrayList<Scene> scenes;// 框架所管理的场景
+
 	@Override
 	public void WinMain(WindowsAPI windowsAPI, int width, int height) {
+
+		scenes = new ArrayList<Scene>();
 		FreeFrame.WIDTH = width;
 		FreeFrame.HEIGHT = height;
 
@@ -24,7 +28,7 @@ public abstract class FreeFrame implements WindowsAPP, GameAPP, EventListener {
 		Msg msg = new Msg();
 		// create window
 		windows.CreateWindow(0, 0, WIDTH, HEIGHT);
-
+		this.init();
 		while (windows.GetMsg(msg)) {
 			windows.DispatchMessage(msg);
 		}
@@ -32,56 +36,82 @@ public abstract class FreeFrame implements WindowsAPP, GameAPP, EventListener {
 	}
 
 	public void keyDown(int keyCode) {
-		// Log.error("down:"+keyCode);
+		for (Scene scene : scenes) {
+			scene.keyDown(keyCode);
+		}
 	}
 
 	public void keyUp(int keyCode) {
-		// Log.error("up:"+keyCode);
-
+		for (Scene scene : scenes) {
+			scene.keyUp(keyCode);
+		}
 	}
 
 	public void mouseLeftButtonDown(int x, int y) {
-
+		for (Scene scene : scenes) {
+			scene.mouseLeftButtonDown(x, y);
+		}
 	}
 
 	public void mouseRightButtonDown(int x, int y) {
-
+		for (Scene scene : scenes) {
+			scene.mouseRightButtonDown(x, y);
+		}
 	}
 
 	public void mouseMiddleButtonDown(int x, int y) {
-
+		for (Scene scene : scenes) {
+			scene.mouseMiddleButtonDown(x, y);
+		}
 	}
 
 	public void mouseLeftButtonUp(int x, int y) {
-
+		for (Scene scene : scenes) {
+			scene.mouseLeftButtonUp(x, y);
+		}
 	}
 
 	public void mouseRightButtonUp(int x, int y) {
+		for (Scene scene : scenes) {
+			scene.mouseRightButtonUp(x, y);
 
+		}
 	}
 
 	public void mouseMiddleButtonUp(int x, int y) {
-
+		for (Scene scene : scenes) {
+			scene.mouseMiddleButtonUp(x, y);
+		}
 	}
 
 	public void mouseHover(int x, int y) {
-
+		for (Scene scene : scenes) {
+			scene.mouseHover(x, y);
+		}
 	}
 
 	public void mouseLeave(int x, int y) {
-
+		for (Scene scene : scenes) {
+			scene.mouseLeave(x, y);
+		}
 	}
 
-	public void mouseWheel() {
-
+	public void mouseWheel(int wheelRotation, int scrollAmount ) {
+		for (Scene scene : scenes) {
+			scene.mouseWheel(wheelRotation,scrollAmount);
+		}
 	}
 
 	public void mouseMove(int x, int y) {
-
+		for (Scene scene : scenes) {
+			scene.mouseMove(x, y);
+		}
 	}
 
 	public void mouseDragged(int x, int y) {
-
+		for (Scene scene : scenes) {
+			scene.mouseDragged(x, y);
+		}
 	}
 
 	@Override
@@ -91,9 +121,9 @@ public abstract class FreeFrame implements WindowsAPP, GameAPP, EventListener {
 
 		switch (msg.getMsgParam().getCode()) {
 		case WM_CREATE: {
-			this.init();
+//			this.init();
 			windows.SetTimer(updateTimerId, updateInterval);// 设置刷新帧率
-			Log.error("Window was created");
+			Log.info("Window was created");
 		}
 			break;
 		case WM_KEYDOWN: {
@@ -147,7 +177,8 @@ public abstract class FreeFrame implements WindowsAPP, GameAPP, EventListener {
 		}
 			break;
 		case WM_MOUSEWHEEL: {
-
+			MouseWheelEvent me = (MouseWheelEvent) msg.getMsgParam().getEvent();
+			mouseWheel(me.getWheelRotation(),me.getScrollAmount());
 		}
 			break;
 		case WM_MOUSEMOVE: {
@@ -161,9 +192,9 @@ public abstract class FreeFrame implements WindowsAPP, GameAPP, EventListener {
 		}
 			break;
 		case WM_TIMER: {
-			
-//			this.update();
-//			this.render();
+
+			// this.update();
+			// this.render();
 		}
 			break;
 		default:
@@ -178,9 +209,11 @@ public abstract class FreeFrame implements WindowsAPP, GameAPP, EventListener {
 
 	protected void registerScene(Scene scene) {
 		windows.registerScene(scene);
+		scenes.add(scene);
 	}
 
 	public void destroy() {
+		scenes.clear();
 		windows.closeTimer();
 		System.exit(0);
 	}

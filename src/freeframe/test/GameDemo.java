@@ -1,21 +1,16 @@
 package freeframe.test;
 
 import freeframe.system.FreeFrame;
-import freeframe.system.Log;
-import freeframe.system.Scene;
 
 public class GameDemo extends FreeFrame {
 
 	GameScene gameScene = null;
 	LableScene lableScene = null;
-	MapScene mapScene = null;
 	
 	@Override
 	public void init() {
 
-		mapScene = new MapScene(500, 50, 300, 300, 1);
-		super.registerScene(mapScene);
-		lableScene = new LableScene(500, 300, 300, 200,1);
+		lableScene = new LableScene(500, 530, 300, 300,1);
 		super.registerScene(lableScene);
 		gameScene = new GameScene(0, 0, FreeFrame.WIDTH, FreeFrame.HEIGHT,1);
 		super.registerScene(gameScene);
@@ -24,14 +19,11 @@ public class GameDemo extends FreeFrame {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
-	
-
+		gameScene.update();
 	}
 
 	long renderAccumilatedTime = 0;// 上次渲染的时间
 
-	int zang = 0;
 	@Override
 	public void render() {
 //		long starttime = System.nanoTime();
@@ -41,12 +33,10 @@ public class GameDemo extends FreeFrame {
 			
 			gameScene.render();
 			lableScene.render();
-			mapScene.render();
 			
 			if (null != gameScene)
 				gameScene.update();
-//			super.UpdateWindow();
-			Log.info(++zang);
+//			super.UpdateWindow();s
 //		}
 		
 
@@ -58,20 +48,5 @@ public class GameDemo extends FreeFrame {
 		super.destroy();
 	}
 
-	@Override
-	public void mouseDragged(int x, int y) {
-		// TODO Auto-generated method stub
-		super.mouseDragged(x, y);
-		Log.error("dragged y:  " + y);
-		
-
-	}
-
-	@Override
-	public void keyDown(int keyCode) {
-		// TODO Auto-generated method stub
-		super.keyDown(keyCode);
-		gameScene.keyDown(keyCode);
-		
-	}
+	
 }

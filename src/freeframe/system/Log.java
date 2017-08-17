@@ -1,7 +1,7 @@
 package freeframe.system;
 
-public class Log {
-
+public final class Log {
+ 
 	public static void info(Object obj) {
 		System.out.println(obj);
 	}

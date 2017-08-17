@@ -232,6 +232,7 @@ public class WindowsKernel extends JFrame implements WindowsAPI {
 	}
 
 	long updateAccumilatedTime = 0;// 上次刷新的时间
+	boolean isStart=false;
 	/* ******** Message *********** */
 	public boolean GetMsg(Msg msg) {
 		Msg wmsg = null;
@@ -242,7 +243,29 @@ public class WindowsKernel extends JFrame implements WindowsAPI {
 			if ((1000/fps) <= (starttime - updateAccumilatedTime)) {
 				updateAccumilatedTime = starttime;
 				
-				SwingUtilities.invokeLater(new Runnable() {
+				if (!isStart) {
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							while(true){
+								try {
+									Thread.sleep(30);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								GameAPP gameAPP = (GameAPP) app;
+								gameAPP.update();
+								gameAPP.render();
+								UpdateWindow();
+							}
+						}
+					}).start();
+					isStart = true;
+				}
+				
+				/*SwingUtilities.invokeLater(new Runnable() {
 
 					@Override
 					public void run() {
@@ -252,7 +275,7 @@ public class WindowsKernel extends JFrame implements WindowsAPI {
 						gameAPP.render();
 						UpdateWindow();
 					}
-				});
+				});*/
 			}
 			
 			try {

@@ -1,8 +1,6 @@
 package freeframe.test;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -39,15 +37,8 @@ public class LableScene extends Scene{
 //		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.5f));//透明度
 //		g2d.drawString("开始游戏", 30, 30);
 		
-	g2d.drawImage(GameScene.img, 0, 0, null);
+	g2d.drawImage(GameScene.img, 0, 0,width,height, null);
 		g2d.setColor(c);
-	}
-
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

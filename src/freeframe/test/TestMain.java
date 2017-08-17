@@ -7,7 +7,7 @@ public class TestMain {
  
     public static void main(String[] args) {
     	WindowsKernel windowsKernel = new WindowsKernel();
-        windowsKernel.runApp(new GameDemo(),1000,900,60);
+        windowsKernel.runApp(new GameDemo(),1000,900,30);
     }
     
     
