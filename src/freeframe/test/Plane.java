@@ -24,8 +24,6 @@ public class Plane extends AbstractGameObject implements KeyEventListener,Contac
  
 	@Override
 	public void draw(Graphics2D g2d) {
-//		g2d.setColor(Color.BLUE);
-//		g2d.fillRect(x, y, width, height);
 		g2d.drawImage(body, x, y, width, height, null);
 	}
 

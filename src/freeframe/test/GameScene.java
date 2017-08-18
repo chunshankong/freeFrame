@@ -14,8 +14,8 @@ public class GameScene extends Scene {
 	Plane plane = null;
 	FpsLabel fps = null;
 	Map map = null;
+	MyArrayList<Missile>missiles = null;
 	
-	public static MyArrayList<Missile>missiles = null;
 	public GameScene(int x, int y, int width, int height,float alpha) {
 		super(x, y, width, height,alpha);
 		
@@ -57,35 +57,20 @@ public class GameScene extends Scene {
 			}
 			 
 		}
-		
+		for (Missile missile : missiles) {
+			
+		}
 		
 //		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));// 透明度
 		// draw spirit
 		plane.draw(g2d);
 	 
-		/*missiles.iforEach(new Consumer<Missile>() {
-
-			@Override
-			public void accept(Missile missile) {
-				// TODO Auto-generated method stub
-				if (null != missile) {
-					if (missile.isLive()) {
-						missile.draw(g2d);
-					}else{
-						missile.destroy();
-						missiles.remove(missile);
-					}
-				} 
-			}
-		});*/
 		map.draw(g2d);
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 
 	}
-
 
 }

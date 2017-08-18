@@ -303,7 +303,6 @@ public abstract class Scene extends JPanel implements GameObject,EventListener,S
 	
 	@Override
 	public boolean isLive() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

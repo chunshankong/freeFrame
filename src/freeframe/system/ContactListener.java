@@ -15,6 +15,10 @@ public interface ContactListener {
 	 */
 	void beginContact(ContactListener target);
 	
+	/**
+	 * 离开碰撞的对象
+	 * @param target 碰撞到的另一个监听者 
+	 */
 	void endContact(ContactListener target);
 	
 	/**
