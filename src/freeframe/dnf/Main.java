@@ -1,0 +1,11 @@
+package freeframe.dnf;
+
+import freeframe.system.WindowsKernel;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		new WindowsKernel().runApp(new Game(), 500, 500, 30);
+	}
+}

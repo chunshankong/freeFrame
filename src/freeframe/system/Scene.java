@@ -47,6 +47,12 @@ public abstract class Scene extends JPanel implements GameObject,EventListener,S
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.gameObjects = new ArrayList<GameObject>();
+		this.keyEventListeners = new ArrayList<KeyEventListener>();
+		this.mouseEventListeners = new ArrayList<MouseEventListener>();
+		this.contactListeners = new ArrayList<ContactListener>();
+		
+		this.contactMap = new HashMap<ContactListener, ArrayList<ContactListener>>();
 	}
 
 	private BufferedImage bufImg = null;

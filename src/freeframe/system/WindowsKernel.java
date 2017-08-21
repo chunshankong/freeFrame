@@ -236,33 +236,33 @@ public class WindowsKernel extends JFrame implements WindowsAPI {
 	public boolean GetMsg(Msg msg) {
 		Msg wmsg = null;
 		while (true) {
-			
-			long starttime = System.nanoTime();
-			starttime = starttime / 1000000;// 当前毫秒
-			if ((1000/fps) <= (starttime - updateAccumilatedTime)) {
-				updateAccumilatedTime = starttime;
 				
-				if (!isStart) {
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							while(true){
-								try {
-									Thread.sleep(30);
-								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+			if (!isStart) {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						while(true){
+							try {
+								Thread.sleep(1);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							long starttime = System.nanoTime();
+							starttime = starttime / 1000000;// 当前毫秒
+							if ((1000/fps) <= (starttime - updateAccumilatedTime)) {
+								updateAccumilatedTime = starttime;
+								
 								GameAPP gameAPP = (GameAPP) app;
 								gameAPP.update();
 								gameAPP.render();
 								UpdateWindow();
 							}
 						}
-					}).start();
-					isStart = true;
-				}
+					}
+				}).start();
+				isStart = true;
+			}
 				
 				/*SwingUtilities.invokeLater(new Runnable() {
 
@@ -275,7 +275,6 @@ public class WindowsKernel extends JFrame implements WindowsAPI {
 						UpdateWindow();
 					}
 				});*/
-			}
 			
 			try {
 				Thread.sleep(1);
