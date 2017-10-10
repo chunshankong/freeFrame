@@ -6,6 +6,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		new WindowsKernel().runApp(new Game(), 500, 500, 30);
+		new WindowsKernel().runApp(new Game(), 800, 500, 30);
 	}
 }

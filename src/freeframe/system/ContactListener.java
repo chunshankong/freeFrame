@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 /**
  * 碰撞监听者
- * @author yang siguo
+ * @author siguo yang
  *
  */
 public interface ContactListener {

@@ -4,6 +4,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -310,6 +311,12 @@ public abstract class Scene extends JPanel implements GameObject,EventListener,S
 	@Override
 	public boolean isLive() {
 		return true;
+	}
+	
+	@Override
+	public Point getPosition() {
+		// TODO Auto-generated method stub
+		return new Point(x, y);
 	}
 
 }

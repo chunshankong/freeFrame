@@ -3,6 +3,7 @@ package freeframe.test;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 import freeframe.system.GameObject;
@@ -14,6 +15,8 @@ public class FpsLabel implements GameObject{
 	int fpsCount = 0;
 	long fpsTime = 0;
 	
+	int x = 50;
+	int y = 100;
 
 	@Override
 	public void draw(Graphics2D g2d) {
@@ -31,7 +34,7 @@ public class FpsLabel implements GameObject{
 		
 		g2d.setColor(Color.LIGHT_GRAY);
 		g2d.setFont(new Font("", 10, 20));
-		g2d.drawString("FPS:" + String.valueOf(show), 50, 100);
+		g2d.drawString("FPS:" + String.valueOf(show), x, y);
 	}
 
 	@Override
@@ -62,6 +65,12 @@ public class FpsLabel implements GameObject{
 	public boolean isLive() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Point getPosition() {
+		// TODO Auto-generated method stub
+		return new Point(x, y);
 	}
 
 }

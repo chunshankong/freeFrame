@@ -1,6 +1,7 @@
 package freeframe.system;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 public interface GameObject {
@@ -37,4 +38,10 @@ public interface GameObject {
 	 * @return
 	 */
 	boolean isLive();
+	
+	/**
+	 * 获取坐标点
+	 * @return
+	 */
+	Point getPosition();
 }

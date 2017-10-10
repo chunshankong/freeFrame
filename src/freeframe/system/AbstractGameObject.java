@@ -1,5 +1,6 @@
 package freeframe.system;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 
 public abstract class AbstractGameObject implements GameObject{
@@ -47,6 +48,12 @@ public abstract class AbstractGameObject implements GameObject{
 	public boolean isLive() {
 		// TODO Auto-generated method stub
 		return live;
+	}
+	
+	@Override
+	public Point getPosition() {
+		// TODO Auto-generated method stub
+		return new Point(x,y);
 	}
 
 }

@@ -2,6 +2,8 @@ package freeframe.utils;
 
 import java.awt.image.BufferedImage;
 
+import freeframe.system.Log;
+
 public class Animation {
 	
 	public enum PlayMode {
@@ -46,6 +48,10 @@ public class Animation {
 			}
 			return keyFrames[index];
 		}
+	}
+	public void reset(){
+		start = false;
+		index = 0;
 	}
 	
 	
