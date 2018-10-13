@@ -31,6 +31,8 @@ public class Plane extends AbstractGameObject implements KeyEventListener,Contac
 	public void update() {
 		// TODO Auto-generated method stub
 //		this.x += 1;
+
+
 		switch (dir) {
 		case L: {
 			this.x -= 10;
@@ -38,8 +40,16 @@ public class Plane extends AbstractGameObject implements KeyEventListener,Contac
 			break;
 		case R: {
 			this.x+=10;
+		}break;
+		case U: {
+			this.y -= 10;
 		}
 			break;
+		case D: {
+			this.y+=10;
+		}
+			break;
+			default:break;
 
 		}
 	}
@@ -55,13 +65,16 @@ public class Plane extends AbstractGameObject implements KeyEventListener,Contac
 		}
 			break;
 		case KeyEvent.VK_UP: {
-			this.y -= 10;
+//			this.y -= 10;
+			dir = Direction.U;
 		}
 			break;
 		case KeyEvent.VK_DOWN: {
-			this.y += 10;
+//			this.y += 10;
+			dir = Direction.D;
 		}
 			break;
+			default:dir = Direction.S;break;
 
 		}
 

@@ -46,7 +46,7 @@ public class GameScene extends Scene {
 		
 		fps.draw(g2d);
 		
-		for(int i = 0;i<missiles.size();i++){
+	/*	for(int i = 0;i<missiles.size();i++){
 			Missile missile = missiles.get(i);
 			if (missile.isLive()) {
 				missile.draw(g2d);
@@ -56,9 +56,14 @@ public class GameScene extends Scene {
 				i--;
 			}
 			 
-		}
+		}*/
 		for (Missile missile : missiles) {
-			
+			if (missile.isLive()) {
+				missile.draw(g2d);
+			}else{
+				missile.destroy();
+				missiles.remove(missile);
+			}
 		}
 		
 //		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));// 透明度

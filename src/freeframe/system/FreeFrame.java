@@ -17,20 +17,34 @@ public abstract class FreeFrame implements WindowsAPP, GameAPP, EventListener {
 
 	private ArrayList<Scene> scenes;// 框架所管理的场景
 
+	private int fps;
+
+	private long updateAccumilatedTime = 0;// 上次刷新的时间
+
 	@Override
-	public void WinMain(WindowsAPI windowsAPI, int width, int height) {
+	public void WinMain(WindowsAPI windowsAPI, int width, int height,int fps) {
 
 		scenes = new ArrayList<Scene>();
 		FreeFrame.WIDTH = width;
 		FreeFrame.HEIGHT = height;
+		this.fps = fps;
 
 		windows = windowsAPI;
 		Msg msg = new Msg();
 		// create window
 		windows.CreateWindow(0, 0, WIDTH, HEIGHT);
 		this.init();
-		while (windows.GetMsg(msg)) {
-			windows.DispatchMessage(msg);
+		while (windows.PeekMessage(msg)) {
+			if (null != msg.getMsgParam())windows.DispatchMessage(msg);
+			long starttime = System.nanoTime();
+			starttime = starttime / 1000000;// 当前毫秒
+			if ((1000/fps) <= (starttime - updateAccumilatedTime)) {
+				updateAccumilatedTime = starttime;
+
+				this.update();
+				this.render();
+				UpdateWindow();
+			}
 		}
 		this.destroy();
 	}

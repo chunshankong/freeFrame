@@ -5,7 +5,8 @@ public interface WindowsAPI {
     void CreateWindow(int x,int y,int width,int height);
     void UpdateWindow();
     void registerScene(Scene scene);
-    boolean GetMsg(Msg msg);
+    boolean GetMessage(Msg msg);
+    boolean PeekMessage(Msg msg);
     int DispatchMessage(Msg msg);
     void SetTimer(int id,int interval);
     void KillTimer(int id);

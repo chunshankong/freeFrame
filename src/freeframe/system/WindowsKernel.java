@@ -30,7 +30,7 @@ public class WindowsKernel extends JFrame implements WindowsAPI {
 	 */
 	private WindowsAPP app;
 	
-	private int fps;
+
 
 	/**
 	 * 窗口消息队列
@@ -221,23 +221,23 @@ public class WindowsKernel extends JFrame implements WindowsAPI {
 	 * @param height
 	 */
 	public void runApp(WindowsAPP windowsAPP, int width, int height,int fps) {
-		this.fps = fps;
 		if (300 < fps) {
 			JOptionPane.showMessageDialog(null, "fps too high!");
 			throw new RuntimeException("fps too high!");
 		}
+
 		this.app = windowsAPP;
-		this.app.WinMain(this, width, height);
+		this.app.WinMain(this, width, height,fps);
 	}
 
-	long updateAccumilatedTime = 0;// 上次刷新的时间
-	boolean isStart=false;
+
+
 	/* ******** Message *********** */
-	public boolean GetMsg(Msg msg) {
+	public boolean GetMessage(Msg msg) {
 		Msg wmsg = null;
 		while (true) {
 				
-			if (!isStart) {
+			/*if (!isStart) {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
@@ -248,34 +248,14 @@ public class WindowsKernel extends JFrame implements WindowsAPI {
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
-							long starttime = System.nanoTime();
-							starttime = starttime / 1000000;// 当前毫秒
-							if ((1000/fps) <= (starttime - updateAccumilatedTime)) {
-								updateAccumilatedTime = starttime;
-								
-								GameAPP gameAPP = (GameAPP) app;
-								gameAPP.update();
-								gameAPP.render();
-								UpdateWindow();
-							}
+
 						}
 					}
 				}).start();
 				isStart = true;
-			}
+			}*/
 				
-				/*SwingUtilities.invokeLater(new Runnable() {
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						GameAPP gameAPP = (GameAPP) app;
-						gameAPP.update();
-						gameAPP.render();
-						UpdateWindow();
-					}
-				});*/
-			
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -288,6 +268,23 @@ public class WindowsKernel extends JFrame implements WindowsAPI {
 		msg.setMsgParam(wmsg.getMsgParam());
 		if (Msg.WM_CLOSE == msg.getMsgParam().getCode())
 			return false;
+
+		if (exitWindow)
+			return false;
+
+		return true;
+	}
+
+	public boolean PeekMessage(Msg msg) {
+		Msg wmsg = null;
+		msg.setMsgParam(null);
+
+		if (null != (wmsg = queue.poll())) {
+			msg.setMsgParam(wmsg.getMsgParam());
+
+			if (Msg.WM_CLOSE == msg.getMsgParam().getCode())
+				return false;
+		}
 
 		if (exitWindow)
 			return false;

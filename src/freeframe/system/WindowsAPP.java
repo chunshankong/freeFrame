@@ -30,7 +30,7 @@ public interface WindowsAPP {
      *@param width
      *@param height
      */
-    void WinMain(WindowsAPI windowsAPI,int width,int height);
+    void WinMain(WindowsAPI windowsAPI,int width,int height,int fps);
     /**
      * 应用程序从消息队列获取消息后通知内核分发消息，内核会回调该方法给应用程序传入消息
      *@Author: 杨思国
