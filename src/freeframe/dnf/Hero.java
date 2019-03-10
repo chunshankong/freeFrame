@@ -3,30 +3,60 @@ package freeframe.dnf;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import freeframe.system.AbstractGameObject;
 import freeframe.system.ContactListener;
 import freeframe.system.KeyEventListener;
 import freeframe.system.Log;
 import freeframe.system.SceneFacade;
+import freeframe.utils.Animation;
+import freeframe.utils.ImageUtil;
+import freeframe.utils.ResourceUtil;
 
 public class Hero extends AbstractGameObject implements KeyEventListener,ContactListener{
 	
 	private AttackRectangle attackRectangle ;
 
+	Animation rightAnimation = null;
+	Animation beAttackedAnimation = null;
+	Animation currentAnimation = null;
+
 	public Hero(int x, int y, int width, int height, SceneFacade sceneFacade) {
 		super(x, y, width, height, sceneFacade);
 		// TODO Auto-generated constructor stub
 		attackRectangle = new AttackRectangle(0,0,0,0,sceneFacade);
+		initialAnimation();
+		currentAnimation = rightAnimation;
 	}
+
+	private void initialAnimation() {
+		BufferedImage[] images = new BufferedImage[42];
+		for (int i = 1; i < images.length; i++) {
+			images[i] = ImageUtil.flipHorizontal(ResourceUtil.getImage("image/dnf/hero/"+(i+1)+".png"));
+		}
+		rightAnimation = new Animation();
+		rightAnimation.setKeyFrames(images);
+		rightAnimation.setDuration(80);
+
+
+	}
+
 
 	@Override
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
+
+		g2d.drawImage(currentAnimation.getKeyFrame(), x, y, null);
+
 		g2d.setColor(Color.BLUE);
-		g2d.drawRect(x, y, width, height);
+
+
+//		g2d.drawRect(x, y, width, height);
 		
-		attackRectangle.draw(g2d);
+//		attackRectangle.draw(g2d);
+
+
 		
 	}
 

@@ -14,18 +14,22 @@ public class GameScene extends Scene{
 	Blanka blanka = null;
 	Hero hero = null;
 
+	BgLable bgLable;
+
 	public GameScene(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		fpsLabel = new FpsLabel();
-		blanka = new Blanka(20, 20, 200, 200, this);
-		hero = new Hero(300,20, 200, 200, this);
+		bgLable = new BgLable(0,0,FreeFrame.WIDTH,FreeFrame.HEIGHT,this);
+		blanka = new Blanka(20, 350, 200, 200, this);
+		hero = new Hero(300,350, 200, 200, this);
 	}
 
 	@Override
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
 		g2d.fillRect(0, 0, FreeFrame.WIDTH, FreeFrame.HEIGHT);
-		
+
+		bgLable.draw(g2d);
 		fpsLabel.draw(g2d);
 		blanka.draw(g2d);
 		hero.draw(g2d);

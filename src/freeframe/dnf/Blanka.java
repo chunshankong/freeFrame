@@ -9,11 +9,13 @@ import freeframe.system.KeyEventListener;
 import freeframe.system.Log;
 import freeframe.system.SceneFacade;
 import freeframe.utils.Animation;
+import freeframe.utils.ImageUtil;
 import freeframe.utils.ResourceUtil;
 
 public class Blanka extends AbstractGameObject implements KeyEventListener,ContactListener{
 
 	Animation rightAnimation = null;
+	Animation leftAnimation = null;
 	Animation beAttackedAnimation = null;
 	Animation currentAnimation = null;
 	
@@ -26,13 +28,19 @@ public class Blanka extends AbstractGameObject implements KeyEventListener,Conta
 	}
 	private void initialAnimation() {
 		BufferedImage [] images = new BufferedImage[6];
+		BufferedImage [] leftimages = new BufferedImage[6];
 		for (int i = 0; i < images.length; i++) {
 			images[i] = ResourceUtil.getImage("image/dnf/blanka/"+(9+i)+".png");
+			leftimages[i]= ImageUtil.flipHorizontal(images[i]);
 		}
 		rightAnimation = new Animation();
 		rightAnimation.setKeyFrames(images);
 		rightAnimation.setDuration(200);
-		
+
+		leftAnimation = new Animation();
+		leftAnimation.setKeyFrames(leftimages);
+		leftAnimation.setDuration(200);
+
 		BufferedImage [] images2 = new BufferedImage[3];
 		for (int i = 0; i < images2.length; i++) {
 			images2[i] = ResourceUtil.getImage("image/dnf/blanka/"+(22+i)+".png");
