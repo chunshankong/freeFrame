@@ -84,7 +84,7 @@ public class Blanka extends AbstractGameObject implements KeyEventListener,Conta
 			}else {
 				beAttacked = true;
 				Log.error("被攻击");
-//				rightAnimation.reset();
+//				attackAnimation.reset();
 				currentAnimation = beAttackedAnimation;
 			}
 			

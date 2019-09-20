@@ -57,6 +57,7 @@ public abstract class Scene extends JPanel implements GameObject,EventListener,S
 	}
 
 	private BufferedImage bufImg = null;
+	private Graphics2D graphics2D = null;
 
 	protected BufferedImage getImage() {
 		return bufImg;
@@ -75,10 +76,11 @@ public abstract class Scene extends JPanel implements GameObject,EventListener,S
 
 	public Graphics2D GetWindowGraphics() {
 
-		if (null == bufImg) {
+		if (null == graphics2D){
 			bufImg = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
+			graphics2D = bufImg.createGraphics();
 		}
-		return bufImg.createGraphics();
+		return graphics2D;
 	}
 	
 	@Override

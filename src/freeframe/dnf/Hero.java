@@ -18,26 +18,35 @@ public class Hero extends AbstractGameObject implements KeyEventListener,Contact
 	
 	private AttackRectangle attackRectangle ;
 
-	Animation rightAnimation = null;
+	Animation attackAnimation = null;
 	Animation beAttackedAnimation = null;
 	Animation currentAnimation = null;
+	Animation walkAnimation = null;
 
 	public Hero(int x, int y, int width, int height, SceneFacade sceneFacade) {
 		super(x, y, width, height, sceneFacade);
 		// TODO Auto-generated constructor stub
 		attackRectangle = new AttackRectangle(0,0,0,0,sceneFacade);
 		initialAnimation();
-		currentAnimation = rightAnimation;
+		currentAnimation = walkAnimation;
 	}
 
 	private void initialAnimation() {
 		BufferedImage[] images = new BufferedImage[42];
-		for (int i = 1; i < images.length; i++) {
-			images[i] = ImageUtil.flipHorizontal(ResourceUtil.getImage("image/dnf/hero/"+(i+1)+".png"));
+		for (int i = 0; i < images.length; i++) {
+			images[i] = ImageUtil.flipHorizontal(ResourceUtil.getImage("image/dnf/hero/attack/"+(i)+".png"));
 		}
-		rightAnimation = new Animation();
-		rightAnimation.setKeyFrames(images);
-		rightAnimation.setDuration(80);
+		attackAnimation = new Animation();
+		attackAnimation.setKeyFrames(images);
+		attackAnimation.setDuration(80);
+
+		BufferedImage[] walkImages = new BufferedImage[8];
+		for (int i = 0; i < walkImages.length; i++) {
+			walkImages[i] = ImageUtil.flipHorizontal(ResourceUtil.getImage("image/dnf/hero/walk/"+(i)+".png"));
+		}
+		walkAnimation = new Animation();
+		walkAnimation.setKeyFrames(walkImages);
+		walkAnimation.setDuration(80);
 
 
 	}
@@ -68,6 +77,8 @@ public class Hero extends AbstractGameObject implements KeyEventListener,Contact
 	
 	@Override
 	public void keyDown(int keyCode) {
+//		currentAnimation = walkAnimation;
+
 		switch (keyCode) {
 		case KeyEvent.VK_LEFT: {
 			this.x -= 10;
@@ -85,11 +96,14 @@ public class Hero extends AbstractGameObject implements KeyEventListener,Contact
 			break;
 		case KeyEvent.VK_DOWN: {
 			this.y += 10;
-		}
+		}break;
 		case KeyEvent.VK_J: {
 			attack();
 		}
 			break;
+		case KeyEvent.VK_O: {
+
+		}break;
 
 		}
 
@@ -101,6 +115,7 @@ public class Hero extends AbstractGameObject implements KeyEventListener,Contact
 		}
 		
 		Log.info("attack");
+		currentAnimation = attackAnimation;
 		attacked = true;
 		this.attackRectangle.setbounds(x-100, y, 100, 50);
 		new Thread(new Runnable() {
@@ -116,6 +131,7 @@ public class Hero extends AbstractGameObject implements KeyEventListener,Contact
 				}
 				attackRectangle.setbounds(0, 0, 0, 0);
 				attacked = false;
+				currentAnimation = walkAnimation;
 			}
 		}).start();
 	}
@@ -137,6 +153,7 @@ public class Hero extends AbstractGameObject implements KeyEventListener,Contact
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
 }
